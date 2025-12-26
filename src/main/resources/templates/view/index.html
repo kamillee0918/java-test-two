@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>메인 페이지 | Java Exam</title>
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/css/style.css">
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+
+<body class="py-4 d-flex">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-6">
+        <div class="welcome-card p-5 text-center">
+          <img src="/image/avatar.png" alt="Logo" width="120" height="120">
+          <h2 class="display-6 fw-bold mb-4">Java 시험</h2>
+          <p class="lead text-muted mb-4">48기 A반 이민재 | Java Exam Project</p>
+          <div class="d-grid gap-3">
+            <a th:href="@{/exam}" class="btn btn-primary btn-lg">
+              <i class="bi bi-box-arrow-in-right me-2"></i>시험 응시
+            </a>
+            <a th:href="@{/result}" class="btn btn-outline-primary btn-lg">
+              <i class="bi bi-person-plus me-2"></i>시험결과 조회
+            </a>
+          </div>
+        </div>
+        <!-- 푸터 -->
+        <p class="my-3 text-body-secondary text-center">
+          <small>© 2025 Kamil Lee's Spring Boot Java Exam Project. All rights reserved.</small>
+        </p>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>

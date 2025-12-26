@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>시험 응시 결과 페이지 | Java Exam</title>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+
+<body>
+<div class="container py-5">
+    <div class="user-list-card p-4">
+        <!-- 헤더 -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1 class="h3 mb-0">
+                <i class="bi bi-people-fill me-2 text-primary"></i>Java 시험 응시 결과
+            </h1>
+            <div>
+                <a href="/" class="btn btn-outline-primary">
+                    <i class="bi bi-house-door me-1"></i>메인
+                </a>
+            </div>
+        </div>
+        <hr>
+        <nav class="navbar navbar-expand-lg">
+            <!-- 정렬 링크 -->
+            <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                        필터링
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a class="dropdown-item" th:href="@{/result(sort='date')}">응시일순</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" th:href="@{/result(sort='name')}">이름순</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" th:href="@{/result(sort='score')}">성적순</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- 결과 테이블 -->
+        <div class="table-responsive">
+            <table class="table table-hover table-striped align-middle fs-5">
+                <thead class="table-primary">
+                <tr class="text-center">
+                    <th style="width: 80px;">이름</th>
+                    <th>이메일</th>
+                    <th>1번</th>
+                    <th>2번</th>
+                    <th>3번</th>
+                    <th>4번</th>
+                    <th>5번</th>
+                    <th>점수</th>
+                    <th>응시일</th>
+                    <th>결과</th>
+                    <th>삭제</th>
+                </tr>
+                </thead>
+                <tbody>
+                <!-- 시험 응시자가 없는 경우 -->
+                <tr th:if="${examList.isEmpty()}">
+                    <td colspan="4" class="text-center text-muted">
+                        <i class="bi bi-three-dots display-4 d-block mb-3"></i>
+                        <p class="mb-0">응시 기록이 없습니다.</p>
+                    </td>
+                </tr>
+                <!-- 시험 응시자 목록 -->
+                <tr th:each="exam : ${examList}" th:unless="${examList.isEmpty()}">
+                    <td th:text="${exam.name}">응시자</td>
+                    <td th:text="${exam.email}">이메일</td>
+                    <td th:text="${exam.answer1}">1번</td>
+                    <td th:text="${exam.answer2}">2번</td>
+                    <td th:text="${exam.answer3}">3번</td>
+                    <td th:text="${exam.answer4}">4번</td>
+                    <td th:text="${exam.answer5}">5번</td>
+                    <td th:text="${exam.score}">점수</td>
+                    <td th:text="${#temporals.format(exam.examDate, 'yy.MM.dd HH:mm:ss')}">응시일</td>
+                    <td>
+                        <span th:if="${exam.score >= 80}" class="text-primary fw-bold">Pass</span>
+                        <span th:if="${exam.score < 80}" class="text-danger fw-bold">Fail</span>
+                    </td>
+                    <td>
+                        <a th:href="@{/result/delete/{id}(id=${exam.examId})}"
+                           class="text-danger text-decoration-underline">X</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- 푸터 -->
+    <p class="my-3 text-body-secondary text-center">
+        <small>© 2025 Kamil Lee's Spring Boot Board Project. All rights reserved.</small>
+    </p>
+</div>
+<!-- Bootstrap Script -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
